@@ -44,16 +44,30 @@ export default function Home() {
   };
 
   const handleNavigate = (page: number) => {
+    // Reset scroll before navigation
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    
     setDirection(page > currentPage ? 1 : -1);
     setCurrentPage(page);
   };
 
   // Scroll to top when page changes
   useEffect(() => {
-    // Immediate scroll to top
+    // Reset scroll immediately
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+    
+    // Also reset after a small delay (for page transition)
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, [currentPage]);
 
   // Page transition variants
