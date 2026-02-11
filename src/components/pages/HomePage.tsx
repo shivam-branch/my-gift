@@ -91,7 +91,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen flex flex-col items-center justify-center px-4 py-6 sm:p-6 text-center pb-36 sm:pb-40"
+      className="min-h-screen flex flex-col items-center px-4 pt-8 sm:pt-12 text-center pb-36 sm:pb-40"
     >
       {/* Animated heart that triggers easter egg */}
       <motion.div
