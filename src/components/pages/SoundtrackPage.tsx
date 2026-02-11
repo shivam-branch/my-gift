@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface Song {
   title: string;
@@ -9,54 +9,80 @@ interface Song {
   memory: string;
   emoji: string;
   color: string;
-  // YouTube video ID - find from YouTube URL
-  // Example: https://www.youtube.com/watch?v=2Vv-BfVoq4g -> youtubeId = "2Vv-BfVoq4g"
-  youtubeId: string;
+  // Direct URL to audio file (Google Cloud Storage, etc.)
+  audioUrl: string;
 }
 
-// 🎵 CUSTOMIZE: Add your own songs with their YouTube video IDs
-// To find a YouTube video ID:
-// 1. Go to YouTube and find your song
-// 2. Copy the URL: https://www.youtube.com/watch?v=VIDEO_ID
-// 3. The ID is after "v=" (e.g., 2Vv-BfVoq4g)
+// 🎵 CUSTOMIZE: Add your own songs with their audio URLs
+// Upload your MP3 files to Google Cloud Storage and paste the public URLs here
 const songs: Song[] = [
   {
-    title: 'Perfect',
-    artist: 'Ed Sheeran',
-    memory: 'This song reminds me of the way you smiled that day when we first danced together.',
-    emoji: '💃',
+    title: 'Hawayein',
+    artist: 'Arijit Singh',
+    memory: 'This song reminds me of the way you smiled that day when we first met.',
+    emoji: '🌬️',
     color: 'from-rose-400 to-pink-500',
-    youtubeId: '2Vv-BfVoq4g',
+    audioUrl: 'https://storage.googleapis.com/my-gift-music/Hawayein%20(Arijit%20singh)(KoshalWorld.Com).mp3',
   },
   {
-    title: 'A Thousand Years',
-    artist: 'Christina Perri',
-    memory: 'Every time I hear this, I think of how I knew you were the one from the very first moment.',
+    title: 'Do Pall',
+    artist: 'Arijit Singh',
+    memory: 'Every moment with you feels like this song - beautiful and fleeting.',
     emoji: '💫',
     color: 'from-pink-400 to-purple-500',
-    youtubeId: 'rtOvBOTyX00',
+    audioUrl: 'https://storage.googleapis.com/my-gift-music/Do%20Pall(KoshalWorld.Com).mp3',
   },
-  {
-    title: 'All of Me',
-    artist: 'John Legend',
-    memory: 'This was playing during our first trip together. I remember your laughter filling the car.',
-    emoji: '🚗',
-    color: 'from-purple-400 to-indigo-500',
-    youtubeId: '450p7goxZqg',
-  },
-  {
-    title: "Can't Help Falling in Love",
-    artist: 'Elvis Presley',
-    memory: 'A classic that describes exactly how I felt - like falling was never a choice.',
-    emoji: '🌹',
-    color: 'from-red-400 to-rose-500',
-    youtubeId: 'vGJTaP6anOU',
-  },
+  // 🎵 ADD MORE SONGS HERE:
+  // {
+  //   title: 'Song Name',
+  //   artist: 'Artist Name',
+  //   memory: 'Your special memory...',
+  //   emoji: '🎵',
+  //   color: 'from-purple-400 to-indigo-500',
+  //   audioUrl: 'https://storage.googleapis.com/my-gift-music/your-song.mp3',
+  // },
 ];
 
 export default function SoundtrackPage() {
   const [playingSong, setPlayingSong] = useState<number | null>(null);
-  const playerRef = useRef<HTMLIFrameElement | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Handle audio playback
+  useEffect(() => {
+    if (playingSong !== null) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      
+      setIsLoading(true);
+      const audio = new Audio(songs[playingSong].audioUrl);
+      audio.loop = true;
+      
+      audio.addEventListener('canplaythrough', () => {
+        setIsLoading(false);
+        audio.play().catch(console.error);
+      });
+      
+      audio.addEventListener('error', () => {
+        setIsLoading(false);
+        console.error('Error loading audio');
+      });
+      
+      audioRef.current = audio;
+    } else {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, [playingSong]);
 
   // Handle song click - toggle play/pause or switch songs
   const handleSongClick = (index: number) => {
@@ -118,11 +144,11 @@ export default function SoundtrackPage() {
                   transition={{ duration: 0.5, repeat: Infinity }}
                   className="text-xl sm:text-2xl flex-shrink-0"
                 >
-                  🎵
+                  {isLoading ? '⏳' : '🎵'}
                 </motion.div>
                 <div className="min-w-0">
                   <p className="font-semibold text-sm sm:text-base" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    Now Playing
+                    {isLoading ? 'Loading...' : 'Now Playing'}
                   </p>
                   <p className="text-xs sm:text-sm text-white/80 truncate" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
                     {songs[playingSong].title} - {songs[playingSong].artist}
@@ -146,7 +172,7 @@ export default function SoundtrackPage() {
                   key={i}
                   className="w-0.5 sm:w-1 bg-white/60 rounded-full"
                   animate={{
-                    height: [6, 16, 6],
+                    height: isLoading ? [6, 6, 6] : [6, 16, 6],
                   }}
                   transition={{
                     duration: 0.5,
@@ -157,30 +183,6 @@ export default function SoundtrackPage() {
               ))}
             </div>
           </motion.div>
-        )}
-
-        {/* YouTube Player - Positioned off-screen but technically visible for iOS */}
-        {playingSong !== null && (
-          <div 
-            style={{ 
-              position: 'fixed',
-              left: '-9999px',
-              top: '-9999px',
-              width: '1px',
-              height: '1px',
-              overflow: 'hidden',
-            }}
-          >
-            <iframe
-              ref={playerRef}
-              width="300"
-              height="200"
-              src={`https://www.youtube.com/embed/${songs[playingSong].youtubeId}?autoplay=1&loop=1&playlist=${songs[playingSong].youtubeId}`}
-              title={songs[playingSong].title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            />
-          </div>
         )}
 
         {/* Song Cards */}
@@ -258,9 +260,9 @@ export default function SoundtrackPage() {
                       >
                         {song.artist}
                       </p>
-                      {/* Memory preview - hidden on very small screens */}
+                      {/* Memory preview */}
                       <p 
-                        className="text-rose-400 text-xs sm:text-sm mt-0.5 sm:mt-1 line-clamp-1 hidden xs:block"
+                        className="text-rose-400 text-xs sm:text-sm mt-0.5 sm:mt-1 line-clamp-1"
                         style={{ fontFamily: 'Cormorant Garamond, serif' }}
                       >
                         &ldquo;{song.memory}&rdquo;
@@ -301,12 +303,6 @@ export default function SoundtrackPage() {
             style={{ fontFamily: 'Dancing Script, cursive' }}
           >
             Tap on any song to play • Tap again to stop 🎵
-          </p>
-          <p 
-            className="text-rose-300 text-xs sm:text-sm"
-            style={{ fontFamily: 'Cormorant Garamond, serif' }}
-          >
-            (Tap play on the YouTube player if music doesn&apos;t start)
           </p>
         </motion.div>
       </div>

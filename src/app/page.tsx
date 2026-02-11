@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import LockScreen from '@/components/LockScreen';
 import FloatingHearts from '@/components/FloatingHearts';
 import Navigation from '@/components/Navigation';
+import BackgroundMusic from '@/components/BackgroundMusic';
 import HomePage from '@/components/pages/HomePage';
 import SoundtrackPage from '@/components/pages/SoundtrackPage';
 import LettersPage from '@/components/pages/LettersPage';
@@ -132,6 +133,9 @@ export default function Home() {
     >
       {/* Floating hearts background */}
       <FloatingHearts />
+
+      {/* Background music player */}
+      <BackgroundMusic />
 
       {/* Page content with transitions */}
       <AnimatePresence mode="wait" custom={direction}>
