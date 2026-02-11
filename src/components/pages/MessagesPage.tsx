@@ -123,53 +123,75 @@ export default function MessagesPage() {
           ))}
         </div>
 
-        {/* Selected message display */}
-        <AnimatePresence mode="wait">
-          {selectedMessage !== null && (
-            <motion.div
-              key={selectedMessage}
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -30, scale: 0.9 }}
-              transition={{ type: 'spring', damping: 20 }}
-              className="mt-8"
-            >
-              <div 
-                className="romantic-card bg-gradient-to-br from-white/90 to-rose-50/90"
-              >
-                {/* Message header */}
-                <div className="flex items-center justify-center gap-3 mb-6">
-                  <motion.span
-                    className="text-4xl"
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    {messageOptions[selectedMessage].emoji}
-                  </motion.span>
-                </div>
-
-                {/* Message content */}
-                <p 
-                  className="text-lg text-rose-700 leading-relaxed text-center"
-                  style={{ fontFamily: 'Cormorant Garamond, serif' }}
-                >
-                  {messageOptions[selectedMessage].message}
-                </p>
-
-                {/* Close button */}
-                <motion.button
-                  onClick={() => setSelectedMessage(null)}
-                  className="mt-6 mx-auto block text-rose-400 text-sm underline"
-                  style={{ fontFamily: 'Cormorant Garamond, serif' }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  Choose another message
-                </motion.button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
+
+      {/* Full-screen message modal */}
+      <AnimatePresence>
+        {selectedMessage !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-6"
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
+          >
+            {/* Backdrop - click to close */}
+            <div 
+              className="absolute inset-0 bg-rose-900/30 backdrop-blur-md"
+              onClick={() => setSelectedMessage(null)}
+            />
+
+            {/* Message card */}
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative z-10 w-full max-w-md max-h-[80vh] overflow-y-auto bg-white rounded-3xl p-8 shadow-2xl"
+            >
+              {/* Emoji header */}
+              <div className="text-center mb-4">
+                <span className="text-5xl" role="img" aria-label="emoji">
+                  {messageOptions[selectedMessage].emoji}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h2
+                className="text-2xl text-center mb-6 text-rose-600"
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
+                {messageOptions[selectedMessage].button}
+              </h2>
+
+              {/* Message content */}
+              <p 
+                className="text-lg text-rose-700 leading-relaxed text-center"
+                style={{ fontFamily: 'Cormorant Garamond, serif' }}
+              >
+                {messageOptions[selectedMessage].message}
+              </p>
+
+              {/* Signature */}
+              <div className="mt-8 text-center">
+                <p 
+                  className="text-xl text-rose-500"
+                  style={{ fontFamily: 'Dancing Script, cursive' }}
+                >
+                  With all my love 💕
+                </p>
+              </div>
+
+              {/* Choose Another button */}
+              <button
+                onClick={() => setSelectedMessage(null)}
+                className="mt-6 mx-auto block btn-romantic"
+              >
+                Choose Another
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

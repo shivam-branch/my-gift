@@ -144,94 +144,137 @@ export default function LettersPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-6"
-            onClick={() => setOpenLetter(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
           >
             {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            <div
+              className="absolute inset-0 bg-rose-900/40 backdrop-blur-md"
+              onClick={() => setOpenLetter(null)}
             />
 
-            {/* Letter Content */}
+            {/* Envelope Opening Animation Container */}
             <motion.div
-              initial={{ scale: 0.8, opacity: 0, rotateX: -30 }}
-              animate={{ scale: 1, opacity: 1, rotateX: 0 }}
-              exit={{ scale: 0.8, opacity: 0, rotateX: 30 }}
-              transition={{ type: 'spring', damping: 20 }}
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              transition={{ type: 'spring', damping: 20, stiffness: 200 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-lg w-full"
+              className="relative w-full max-w-md"
             >
-              <div 
-                className="bg-gradient-to-br from-amber-50 to-rose-50 rounded-3xl p-8 shadow-2xl"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f4a4b5' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                }}
+              {/* Envelope flap (opening animation) */}
+              <motion.div
+                initial={{ rotateX: 0 }}
+                animate={{ rotateX: 180 }}
+                transition={{ delay: 0.2, duration: 0.6, ease: 'easeOut' }}
+                className="absolute -top-8 left-1/2 -translate-x-1/2 w-32 h-16 origin-bottom"
+                style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
               >
-                {/* Decorative wax seal */}
-                <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.3, type: 'spring' }}
-                  className="absolute -top-4 left-1/2 transform -translate-x-1/2"
-                >
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${letters[openLetter].color} flex items-center justify-center shadow-lg`}>
-                    <span className="text-2xl">{letters[openLetter].emoji}</span>
-                  </div>
-                </motion.div>
+                <div className={`w-full h-full bg-gradient-to-br ${letters[openLetter].color} rounded-t-3xl opacity-60`} 
+                  style={{ 
+                    clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
+                    backfaceVisibility: 'hidden'
+                  }} 
+                />
+              </motion.div>
 
-                {/* Letter header */}
-                <motion.h3
-                  initial={{ y: -10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-2xl text-rose-700 text-center mt-4 mb-6"
-                  style={{ fontFamily: 'Dancing Script, cursive' }}
-                >
-                  {letters[openLetter].trigger}
-                </motion.h3>
+              {/* Letter paper sliding up */}
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.5, ease: 'easeOut' }}
+                className="relative bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[75vh]"
+              >
+                {/* Decorative header stripe */}
+                <div className={`h-2 bg-gradient-to-r ${letters[openLetter].color}`} />
+                
+                {/* Scrollable content */}
+                <div className="p-6 overflow-y-auto max-h-[65vh]">
+                  {/* Wax seal */}
+                  <motion.div
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ delay: 0.7, type: 'spring', stiffness: 200 }}
+                    className="flex justify-center mb-4"
+                  >
+                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${letters[openLetter].color} flex items-center justify-center shadow-lg`}>
+                      <span className="text-3xl">{letters[openLetter].emoji}</span>
+                    </div>
+                  </motion.div>
 
-                {/* Letter body */}
-                <motion.p
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-lg text-rose-800 leading-relaxed text-center"
-                  style={{ fontFamily: 'Cormorant Garamond, serif' }}
-                >
-                  {letters[openLetter].message}
-                </motion.p>
-
-                {/* Signature */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6 }}
-                  className="mt-8 text-right"
-                >
-                  <p 
-                    className="text-xl text-rose-600"
+                  {/* Letter title */}
+                  <motion.h3
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                    className="text-2xl text-rose-600 text-center mb-6"
                     style={{ fontFamily: 'Dancing Script, cursive' }}
                   >
-                    With all my love,
-                    <br />
-                    Forever Yours 💕
-                  </p>
-                </motion.div>
+                    {letters[openLetter].trigger}
+                  </motion.h3>
 
-                {/* Close button */}
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8 }}
-                  onClick={() => setOpenLetter(null)}
-                  className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 btn-romantic text-sm"
-                >
-                  Close Letter
-                </motion.button>
-              </div>
+                  {/* Decorative divider */}
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: 0.9, duration: 0.4 }}
+                    className="flex items-center justify-center gap-3 mb-6"
+                  >
+                    <div className="h-px w-12 bg-rose-200" />
+                    <span className="text-rose-300">💕</span>
+                    <div className="h-px w-12 bg-rose-200" />
+                  </motion.div>
+
+                  {/* Letter body - more readable */}
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1 }}
+                    className="text-lg text-gray-700 leading-relaxed text-center px-2"
+                    style={{ fontFamily: 'Cormorant Garamond, serif', lineHeight: '1.8' }}
+                  >
+                    {letters[openLetter].message}
+                  </motion.p>
+
+                  {/* Signature */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2 }}
+                    className="mt-8 text-center"
+                  >
+                    <p 
+                      className="text-xl text-rose-500"
+                      style={{ fontFamily: 'Dancing Script, cursive' }}
+                    >
+                      With all my love,
+                    </p>
+                    <p 
+                      className="text-lg text-rose-400 mt-1"
+                      style={{ fontFamily: 'Dancing Script, cursive' }}
+                    >
+                      Forever Yours 💕
+                    </p>
+                  </motion.div>
+
+                  {/* Close button */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.3 }}
+                    className="mt-6 flex justify-center"
+                  >
+                    <button
+                      onClick={() => setOpenLetter(null)}
+                      className="btn-romantic"
+                    >
+                      Close Letter
+                    </button>
+                  </motion.div>
+                </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import LockScreen from '@/components/LockScreen';
 import FloatingHearts from '@/components/FloatingHearts';
 import Navigation from '@/components/Navigation';
-import BackgroundMusic from '@/components/BackgroundMusic';
+import ControlPanel from '@/components/ControlPanel';
 import HomePage from '@/components/pages/HomePage';
 import SoundtrackPage from '@/components/pages/SoundtrackPage';
 import LettersPage from '@/components/pages/LettersPage';
@@ -134,8 +134,12 @@ export default function Home() {
       {/* Floating hearts background */}
       <FloatingHearts />
 
-      {/* Background music player */}
-      <BackgroundMusic />
+      {/* Control Panel - Music & Lock */}
+      <ControlPanel onLock={() => {
+        localStorage.removeItem('valentine-unlocked');
+        setIsUnlocked(false);
+        setCurrentPage(0);
+      }} />
 
       {/* Page content with transitions */}
       <AnimatePresence mode="wait" custom={direction}>
@@ -164,22 +168,6 @@ export default function Home() {
         pageNames={pageNames}
       />
 
-      {/* Lock button (to reset for demo) */}
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => {
-          localStorage.removeItem('valentine-unlocked');
-          setIsUnlocked(false);
-          setCurrentPage(0);
-        }}
-        className="fixed top-4 right-4 z-50 text-sm text-rose-600 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-rose-200 hover:bg-white hover:shadow-lg transition-all duration-200"
-        style={{ fontFamily: 'Cormorant Garamond, serif' }}
-      >
-        🔒 Lock
-      </motion.button>
     </main>
   );
 }
