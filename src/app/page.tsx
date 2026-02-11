@@ -50,7 +50,10 @@ export default function Home() {
 
   // Scroll to top when page changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Immediate scroll to top
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }, [currentPage]);
 
   // Page transition variants
@@ -131,7 +134,7 @@ export default function Home() {
 
   return (
     <main 
-      className="min-h-screen overflow-hidden"
+      className="min-h-screen overflow-x-hidden"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
