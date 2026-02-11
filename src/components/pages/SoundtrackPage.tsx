@@ -159,25 +159,28 @@ export default function SoundtrackPage() {
           </motion.div>
         )}
 
-        {/* YouTube Player - Visible mini player for mobile compatibility */}
+        {/* YouTube Player - Positioned off-screen but technically visible for iOS */}
         {playingSong !== null && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-4 sm:mb-6 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg"
+          <div 
+            style={{ 
+              position: 'fixed',
+              left: '-9999px',
+              top: '-9999px',
+              width: '1px',
+              height: '1px',
+              overflow: 'hidden',
+            }}
           >
             <iframe
               ref={playerRef}
-              width="100%"
-              height="60"
+              width="300"
+              height="200"
               src={`https://www.youtube.com/embed/${songs[playingSong].youtubeId}?autoplay=1&loop=1&playlist=${songs[playingSong].youtubeId}`}
               title={songs[playingSong].title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="rounded-xl sm:rounded-2xl"
             />
-          </motion.div>
+          </div>
         )}
 
         {/* Song Cards */}
