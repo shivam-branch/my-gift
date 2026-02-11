@@ -48,6 +48,11 @@ export default function Home() {
     setCurrentPage(page);
   };
 
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
+
   // Page transition variants
   const pageVariants = {
     enter: (direction: number) => ({

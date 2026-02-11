@@ -32,6 +32,14 @@ const songs: Song[] = [
     color: 'from-pink-400 to-purple-500',
     audioUrl: 'https://storage.googleapis.com/my-gift-music/Do%20Pall(KoshalWorld.Com).mp3',
   },
+  {
+    title: 'Agar Tum Saath Ho',
+    artist: 'Arijit Singh & Alka Yagnik',
+    memory: 'This song captures everything I feel for you - the love, the longing, the forever.',
+    emoji: '💕',
+    color: 'from-purple-400 to-indigo-500',
+    audioUrl: 'https://storage.googleapis.com/my-gift-music/Agar%20Tum%20Saath%20Ho%20Tamasha%20320%20Kbps.mp3',
+  },
   // 🎵 ADD MORE SONGS HERE:
   // {
   //   title: 'Song Name',
@@ -186,7 +194,7 @@ export default function SoundtrackPage() {
         )}
 
         {/* Song Cards */}
-        <div className="space-y-3 sm:space-y-4">
+        <div className="grid gap-4 sm:gap-6">
           {songs.map((song, index) => {
             const isPlaying = playingSong === index;
             
