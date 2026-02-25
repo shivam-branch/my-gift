@@ -125,7 +125,7 @@ export default function LettersPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen py-12 px-6 pb-44"
+      className="min-h-screen py-12 px-6 pb-32"
     >
       <div className="max-w-2xl mx-auto">
         {/* Header */}
@@ -209,6 +209,17 @@ export default function LettersPage() {
             </motion.div>
           ))}
         </div>
+
+        {/* Hint note */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="text-center text-rose-400 mt-8 mb-20"
+          style={{ fontFamily: 'Dancing Script, cursive' }}
+        >
+          ✨ Tap any letter to open it ✨
+        </motion.p>
       </div>
 
       {/* Letter Modal */}

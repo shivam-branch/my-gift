@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LockScreen from '@/components/LockScreen';
 import FloatingHearts from '@/components/FloatingHearts';
@@ -29,6 +29,17 @@ export default function Home() {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(0);
+  const mainRef = useRef<HTMLElement>(null);
+
+  // Function to reset scroll position
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0;
+    }
+  };
 
   // Check if already unlocked (localStorage)
   useEffect(() => {
@@ -45,9 +56,7 @@ export default function Home() {
 
   const handleNavigate = (page: number) => {
     // Reset scroll before navigation
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    scrollToTop();
     
     setDirection(page > currentPage ? 1 : -1);
     setCurrentPage(page);
@@ -56,18 +65,18 @@ export default function Home() {
   // Scroll to top when page changes
   useEffect(() => {
     // Reset scroll immediately
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    scrollToTop();
     
-    // Also reset after a small delay (for page transition)
-    const timer = setTimeout(() => {
-      window.scrollTo(0, 0);
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }, 100);
+    // Also reset after delays to handle animation timing
+    const timer1 = setTimeout(scrollToTop, 50);
+    const timer2 = setTimeout(scrollToTop, 150);
+    const timer3 = setTimeout(scrollToTop, 300);
     
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
   }, [currentPage]);
 
   // Page transition variants
@@ -148,6 +157,7 @@ export default function Home() {
 
   return (
     <main 
+      ref={mainRef}
       className="min-h-screen overflow-x-hidden"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
