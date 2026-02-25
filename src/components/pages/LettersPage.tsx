@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface Letter {
   trigger: string;
@@ -119,13 +119,25 @@ You are loved. Deeply. Completely. Always.`,
 
 export default function LettersPage() {
   const [openLetter, setOpenLetter] = useState<number | null>(null);
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    if (pageRef.current) {
+      pageRef.current.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
+  }, []);
 
   return (
     <motion.div
+      ref={pageRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen py-12 px-6 pb-32"
+      className="min-h-screen py-6 sm:py-12 px-3 sm:px-6 pb-36 sm:pb-40"
     >
       <div className="max-w-2xl mx-auto">
         {/* Header */}

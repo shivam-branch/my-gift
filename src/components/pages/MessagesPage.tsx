@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface MessageOption {
   button: string;
@@ -51,9 +51,18 @@ const messageOptions: MessageOption[] = [
 
 export default function MessagesPage() {
   const [selectedMessage, setSelectedMessage] = useState<number | null>(null);
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }, []);
 
   return (
     <motion.div
+      ref={pageRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
