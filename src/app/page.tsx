@@ -17,12 +17,12 @@ import MessagesPage from '@/components/pages/MessagesPage';
 const SECRET_PASSWORD = '1111';
 
 const pageNames = [
-  '💖 Welcome Home',
-  '🎧 Soundtrack of Us',
-  '💌 Open When Letters',
+  '💖 Happy Anniversary',
+  '🎧 Our Love Songs',
+  '💌 Love Letters',
   '💭 Things I Never Say',
   '🎥 Message From Future',
-  '❤️ Choose Your Message',
+  '❤️ Sweet Words For You',
 ];
 
 export default function Home() {

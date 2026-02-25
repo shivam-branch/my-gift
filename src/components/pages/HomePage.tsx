@@ -132,7 +132,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           className="text-2xl sm:text-4xl md:text-5xl gradient-text mb-4 sm:mb-6"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
-          <Typewriter text="Welcome, My Love" delay={80} />
+          <Typewriter text="Welcome, My Shree" delay={80} />
         </h1>
 
         <motion.p
@@ -142,8 +142,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           className="text-base sm:text-lg md:text-xl text-rose-700 mb-4 sm:mb-8 leading-relaxed px-2"
           style={{ fontFamily: 'Cormorant Garamond, serif' }}
         >
-          I created this little corner of the internet just for you. 
-          Every page holds a piece of my heart, a memory, a promise.
+          One year of being your husband, and every day feels like a blessing.
+          This is my gift to you — a collection of our love, memories, and dreams.
         </motion.p>
 
         <motion.p
@@ -153,7 +153,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           className="text-lg sm:text-xl md:text-2xl text-rose-500 mb-6 sm:mb-12"
           style={{ fontFamily: 'Dancing Script, cursive' }}
         >
-          Happy Valentine&apos;s Day, forever and always 💕
+          Happy 1st Anniversary, my forever love 💕
         </motion.p>
 
         {/* Quick navigation cards */}
@@ -164,7 +164,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           className="grid grid-cols-2 gap-2 sm:gap-4 mt-4 sm:mt-8"
         >
           {[
-            { icon: '🎧', label: 'Our Songs', page: 1 },
+            { icon: '🎧', label: 'Our Love Songs', page: 1 },
             { icon: '💌', label: 'Love Letters', page: 2 },
             { icon: '💭', label: 'Sweet Words', page: 3 },
             { icon: '🎥', label: 'From Future', page: 4 },

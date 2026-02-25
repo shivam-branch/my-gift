@@ -20,13 +20,13 @@ const messageOptions: MessageOption[] = [
   {
     button: "Make me smile",
     emoji: "😊",
-    message: "Did you know that your smile is my favorite thing in the entire universe? It's true! When you smile, flowers bloom, birds sing, and my heart does a little happy dance. Now imagine me doing the chicken dance right now just to see you smile. Are you smiling yet? 🐔💃",
+    message: "Did you know that your smile is my favorite thing in the entire universe? It's true! When you smile, flowers bloom, birds sing, and my heart does a little happy dance. Now imagine me smiling right now just to see you smile. Are you smiling yet? 🥰💃",
     color: "from-yellow-400 to-amber-500",
   },
   {
     button: "Remind me you love me",
     emoji: "💕",
-    message: "I love you. Not just in the big moments, but in the small ones too. In the way you laugh at your own jokes. In how you scrunch your nose when you're thinking. In your morning voice and your sleepy eyes. I love all of you – the messy parts, the beautiful parts, every single part.",
+    message: "I love you. Not just in the big moments, but in the small ones too. In the way you laugh at your own jokes. In how your cheek dimple shows up when you're thinking. In your morning voice and your sleepy eyes. I love all of you – the messy parts, the beautiful parts, every single part.",
     color: "from-rose-400 to-pink-500",
   },
   {

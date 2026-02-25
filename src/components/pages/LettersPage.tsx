@@ -8,38 +8,112 @@ interface Letter {
   emoji: string;
   message: string;
   color: string;
+  signature: string;
+  signatureEmoji: string;
 }
 
 const letters: Letter[] = [
   {
     trigger: "Open when you're sad",
     emoji: '🌧️',
-    message: "Close your eyes and remember, you are loved more than you know. I'm here, always. Every tear you shed, I wish I could wipe away. But know this - after every storm comes a rainbow, and you, my love, are that rainbow in my life. Take a deep breath. You've got this. We've got this.",
+    message: `It's okay to feel heavy sometimes. Even the strongest hearts have quiet storms.
+
+I am here, I would sit beside you without trying to fix anything — just holding your hand until the world felt softer again.
+
+You don't have to be strong every single day. On the days you feel tired, lean on me. We are a team, and we always find our way back to the light together.`,
     color: 'from-blue-400 to-indigo-500',
+    signature: 'Your shelter in every storm',
+    signatureEmoji: '☂️',
   },
   {
     trigger: "Open when you doubt yourself",
     emoji: '💪',
-    message: "You are stronger than you think, and I'm always on your team. I've watched you overcome so much, face challenges head-on, and emerge even more beautiful. Don't let anyone, including yourself, dim your light. You are capable, you are worthy, and you are absolutely incredible.",
+    message: `Whenever you start questioning yourself, remember this — I have seen your courage up close.
+
+I've watched you take on things that scared you and still move forward. That quiet determination in you is powerful.
+
+If your mind ever tells you that you're not enough, borrow my eyes for a moment. Through them, you are capable, intelligent, graceful, and absolutely unstoppable.`,
     color: 'from-amber-400 to-orange-500',
+    signature: 'The one who sees your strength',
+    signatureEmoji: '👀',
   },
   {
     trigger: "Open when you miss me",
     emoji: '💕',
-    message: "Distance can't reduce what lives in the heart. Close your eyes and feel my arms around you. I'm thinking of you right now, wherever you are. Every moment apart only makes our time together more precious. Hold this close - my heart is with you, always.",
+    message: `If you're missing me right now, pause and smile for a second.
+
+Think about our random laughs, the way we look at each other across the room, the comfort of just sitting together doing nothing.
+
+That connection doesn't disappear with distance. Until I can hold you again, remember this — I choose you. Every day. In every place. In every version of our future.`,
     color: 'from-rose-400 to-pink-500',
+    signature: 'Forever choosing you',
+    signatureEmoji: '💓',
   },
   {
     trigger: "Open when you need motivation",
     emoji: '🌟',
-    message: "Remember why you started. Remember the fire in your eyes when you talked about your dreams. That fire is still there - it never left. You inspire me every single day with your dedication and passion. Now go show the world what I already know - you're extraordinary.",
+    message: `You don't just dream — you build, patiently and fearlessly.
+
+I've seen the spark in your eyes when you talk about your goals, and that spark is still there. Nothing about you has dimmed.
+
+If today feels hard, take one small step forward — that's all it takes. I already know how strong you are. Now go remind the world.`,
     color: 'from-yellow-400 to-amber-500',
+    signature: 'Your biggest believer',
+    signatureEmoji: '🏆',
   },
   {
     trigger: "Open when you can't sleep",
     emoji: '🌙',
-    message: "Close your eyes, my love. Imagine I'm right there beside you, whispering how much I love you. Let go of the worries of today - they can wait until tomorrow. For now, just breathe, relax, and drift into dreams where I'll be waiting for you. Sweet dreams, always.",
+    message: `If the night feels long and your thoughts won't slow down, imagine my hand resting gently over yours.
+
+You are safe. You are loved. Nothing urgent needs you right now.
+
+Let tomorrow wait. Let your breathing soften. And as you drift into sleep, remember — wherever you are, you fall asleep loved.`,
     color: 'from-indigo-400 to-purple-500',
+    signature: 'Your peaceful night',
+    signatureEmoji: '🌙',
+  },
+  {
+    trigger: "Open on our anniversary",
+    emoji: '💍',
+    message: `If you're reading this years from now, I hope we're still laughing at silly things and holding hands without even thinking about it.
+
+I hope we've grown kinder, wiser, and even more in love. Whatever life gave us, I hope we faced it together.
+
+And if I ever forget to say it enough — marrying you was the best decision of my life, and I would choose you all over again.`,
+    color: 'from-red-500 to-rose-600',
+    signature: 'Your husband, today and always',
+    signatureEmoji: '💒',
+  },
+  {
+    trigger: "Open when you're angry at me",
+    emoji: '🙈',
+    message: `I messed up. I know.
+
+I'm sorry — not to end the fight, but because I never want to hurt you.
+
+Even when you're furious, I love you. Even now.
+
+Take your time. I'll be here with rasmalai and an apology when you're ready.`,
+    color: 'from-orange-400 to-red-400',
+    signature: 'Your imperfect but devoted husband',
+    signatureEmoji: '🙏',
+  },
+  {
+    trigger: "Open when you feel unloved",
+    emoji: '🤍',
+    message: `Read this carefully:
+
+You are the most loved person in my universe.
+
+Not for what you do. Not for how you look. Just because you're YOU.
+
+Loving you is like breathing — natural, essential, endless.
+
+You are loved. Deeply. Completely. Always.`,
+    color: 'from-purple-400 to-pink-400',
+    signature: 'Yours until the stars burn out',
+    signatureEmoji: '✨',
   },
 ];
 
@@ -65,7 +139,7 @@ export default function LettersPage() {
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            💌
+            💌 
           </motion.span>
           <h1 
             className="text-4xl gradient-text mb-4"
@@ -77,7 +151,7 @@ export default function LettersPage() {
             className="text-xl text-rose-600"
             style={{ fontFamily: 'Dancing Script, cursive' }}
           >
-            Digital letters filled with love, for whenever you need them
+            My Shree, letters from my heart, sealed with love
           </p>
         </motion.div>
 
@@ -185,13 +259,13 @@ export default function LettersPage() {
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.5, ease: 'easeOut' }}
-                className="relative bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[75vh]"
+                className="relative bg-white rounded-2xl shadow-2xl overflow-hidden"
               >
                 {/* Decorative header stripe */}
                 <div className={`h-2 bg-gradient-to-r ${letters[openLetter].color}`} />
                 
-                {/* Scrollable content */}
-                <div className="p-6 overflow-y-auto max-h-[65vh]">
+                {/* Content */}
+                <div className="p-6">
                   {/* Wax seal */}
                   <motion.div
                     initial={{ scale: 0, rotate: -180 }}
@@ -199,8 +273,8 @@ export default function LettersPage() {
                     transition={{ delay: 0.7, type: 'spring', stiffness: 200 }}
                     className="flex justify-center mb-4"
                   >
-                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${letters[openLetter].color} flex items-center justify-center shadow-lg`}>
-                      <span className="text-3xl">{letters[openLetter].emoji}</span>
+                    <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${letters[openLetter].color} flex items-center justify-center shadow-lg`}>
+                      <span className="text-2xl">{letters[openLetter].emoji}</span>
                     </div>
                   </motion.div>
 
@@ -209,7 +283,7 @@ export default function LettersPage() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
-                    className="text-2xl text-rose-600 text-center mb-6"
+                    className="text-xl text-rose-600 text-center mb-4"
                     style={{ fontFamily: 'Dancing Script, cursive' }}
                   >
                     {letters[openLetter].trigger}
@@ -220,43 +294,50 @@ export default function LettersPage() {
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ delay: 0.9, duration: 0.4 }}
-                    className="flex items-center justify-center gap-3 mb-6"
+                    className="flex items-center justify-center gap-3 mb-5"
                   >
-                    <div className="h-px w-12 bg-rose-200" />
-                    <span className="text-rose-300">💕</span>
-                    <div className="h-px w-12 bg-rose-200" />
+                    <div className="h-px w-10 bg-rose-200" />
+                    <span className="text-rose-300 text-sm">💕</span>
+                    <div className="h-px w-10 bg-rose-200" />
                   </motion.div>
 
-                  {/* Letter body - more readable */}
-                  <motion.p
+                  {/* Letter body */}
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1 }}
-                    className="text-lg text-gray-700 leading-relaxed text-center px-2"
+                    className="text-gray-700 leading-relaxed text-center space-y-3"
                     style={{ fontFamily: 'Cormorant Garamond, serif', lineHeight: '1.8' }}
                   >
-                    {letters[openLetter].message}
-                  </motion.p>
+                    {letters[openLetter].message.split('\n\n').map((paragraph, idx) => (
+                      <p key={idx} className="text-base">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </motion.div>
 
-                  {/* Signature */}
+                  {/* Unique Signature */}
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}
-                    className="mt-8 text-center"
+                    className="mt-6 pt-4 border-t border-rose-100"
                   >
-                    <p 
-                      className="text-xl text-rose-500"
-                      style={{ fontFamily: 'Dancing Script, cursive' }}
-                    >
-                      With all my love,
-                    </p>
-                    <p 
-                      className="text-lg text-rose-400 mt-1"
-                      style={{ fontFamily: 'Dancing Script, cursive' }}
-                    >
-                      Forever Yours 💕
-                    </p>
+                    <div className="text-center">
+                      <motion.span
+                        className="text-xl block mb-1"
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        {letters[openLetter].signatureEmoji}
+                      </motion.span>
+                      <p 
+                        className="text-lg text-rose-500 italic"
+                        style={{ fontFamily: 'Dancing Script, cursive' }}
+                      >
+                        {letters[openLetter].signature}
+                      </p>
+                    </div>
                   </motion.div>
 
                   {/* Close button */}
@@ -264,11 +345,11 @@ export default function LettersPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.3 }}
-                    className="mt-6 flex justify-center"
+                    className="mt-5 flex justify-center"
                   >
                     <button
                       onClick={() => setOpenLetter(null)}
-                      className="btn-romantic"
+                      className="btn-romantic text-sm px-6 py-2"
                     >
                       Close Letter
                     </button>

@@ -47,7 +47,7 @@ export default function FuturePage() {
             className="text-lg text-rose-600"
             style={{ fontFamily: 'Dancing Script, cursive' }}
           >
-            A letter from us, 20 years from now...
+            A letter from us, 20 years after our wedding...
           </p>
         </motion.div>
 
@@ -116,7 +116,7 @@ export default function FuturePage() {
                 className="text-sm text-amber-600 bg-amber-100 px-4 py-1 rounded-full"
                 style={{ fontFamily: 'Cormorant Garamond, serif' }}
               >
-                📅 February 14, 2046
+                📅  Our 21st Anniversary, 2046
               </span>
             </motion.div>
 
@@ -154,8 +154,8 @@ export default function FuturePage() {
                   className="text-lg text-rose-800 leading-relaxed"
                   style={{ fontFamily: 'Cormorant Garamond, serif' }}
                 >
-                  Remember when we were young and scared, wondering if we could really do this life thing together? 
-                  Well, we did. We built a home, not just with walls, but with laughter, tears, late-night talks, and morning coffees.
+                  Remember our 1st anniversary when we were still figuring out married life together? 
+                  Well, we did it beautifully. We built a home, not just with walls, but with laughter, tears, late-night talks, and morning coffees.
                 </p>
 
                 <p 
@@ -169,7 +169,7 @@ export default function FuturePage() {
                   className="text-lg text-rose-800 leading-relaxed"
                   style={{ fontFamily: 'Cormorant Garamond, serif' }}
                 >
-                  And if I could go back to that nervous person who wrote this letter in 2026, I would tell them:
+                  And if I could go back to that person who wrote this letter on our 1st anniversary, I would tell them:
                 </p>
 
                 <motion.p 
@@ -187,7 +187,7 @@ export default function FuturePage() {
                   className="text-lg text-rose-800 leading-relaxed"
                   style={{ fontFamily: 'Cormorant Garamond, serif' }}
                 >
-                  Twenty years later, your smile still makes my heart skip. Your laugh is still my favorite sound. 
+                  Twenty-one years of marriage later, your smile still makes my heart skip. Your laugh is still my favorite sound. 
                   And I fall in love with you all over again, every single day.
                 </p>
               </motion.div>

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "💕 For My Forever Love",
-  description: "A special gift for the love of my life",
+  title: "💕 Happy 1st Anniversary, My Love",
+  description: "Celebrating one beautiful year of marriage together",
 };
 
 export default function RootLayout({

@@ -26,7 +26,7 @@ const songs: Song[] = [
   },
   {
     title: 'Do Pall',
-    artist: 'Arijit Singh',
+    artist: 'Surinder Kaur',
     memory: 'Every moment with you feels like this song - beautiful and fleeting.',
     emoji: '💫',
     color: 'from-pink-400 to-purple-500',
@@ -40,15 +40,30 @@ const songs: Song[] = [
     color: 'from-purple-400 to-indigo-500',
     audioUrl: 'https://storage.googleapis.com/my-gift-music/Agar%20Tum%20Saath%20Ho%20Tamasha%20320%20Kbps.mp3',
   },
-  // 🎵 ADD MORE SONGS HERE:
-  // {
-  //   title: 'Song Name',
-  //   artist: 'Artist Name',
-  //   memory: 'Your special memory...',
-  //   emoji: '🎵',
-  //   color: 'from-purple-400 to-indigo-500',
-  //   audioUrl: 'https://storage.googleapis.com/my-gift-music/your-song.mp3',
-  // },
+  {
+    title: 'Ghoomar',
+    artist: 'Shreya Ghoshal & Swaroop Khan',
+    memory: 'The grace and elegance of this song reminds me of you - my queen.',
+    emoji: '💃',
+    color: 'from-amber-400 to-orange-500',
+    audioUrl: 'https://storage.googleapis.com/my-gift-music/Ghoomar%20-%20PagalNew.mp3',
+  },
+  {
+    title: 'Nainowale Ne',
+    artist: 'Neeti Mohan',
+    memory: 'Your eyes speak a thousand words, just like this melody.',
+    emoji: '👁️',
+    color: 'from-emerald-400 to-teal-500',
+    audioUrl: 'https://storage.googleapis.com/my-gift-music/Nainowale%20Ne%20Padmaavat%20320%20Kbps.mp3',
+  },
+  {
+    title: 'Mushkil Hai',
+    artist: 'Sachin-Jigar',
+    memory: 'Being away from you even for a moment is mushkil - this song knows.',
+    emoji: '😊',
+    color: 'from-sky-400 to-blue-500',
+    audioUrl: 'https://storage.googleapis.com/my-gift-music/Mushkil%20Hai%20Vicky%20Vidya%20Ka%20Woh%20Wala%20Video%20320%20Kbps.mp3',
+  },
 ];
 
 export default function SoundtrackPage() {
