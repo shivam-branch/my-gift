@@ -308,7 +308,7 @@ export default function LockScreen({ onUnlock, correctPassword }: LockScreenProp
                   style={{ fontFamily: 'Cormorant Garamond, serif' }}
                 >
                   <span className="text-lg sm:text-xl">💡</span>
-                  Hint: Our special date
+                  Hint: Our special date DDMMYYYY
                   <span className="text-lg sm:text-xl">💑</span>
                 </motion.p>
               </motion.div>

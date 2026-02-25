@@ -14,7 +14,7 @@ import FuturePage from '@/components/pages/FuturePage';
 import MessagesPage from '@/components/pages/MessagesPage';
 
 // 🔐 CUSTOMIZE THIS: Set your special password (wedding date, first trip date, etc.)
-const SECRET_PASSWORD = '1111';
+const SECRET_PASSWORD = '01032025';
 
 const pageNames = [
   '💖 Happy Anniversary',

@@ -125,7 +125,7 @@ export default function LettersPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen py-12 px-6 pb-32"
+      className="min-h-screen py-12 px-6 pb-44"
     >
       <div className="max-w-2xl mx-auto">
         {/* Header */}
